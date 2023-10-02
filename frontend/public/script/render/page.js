@@ -1,4 +1,9 @@
-
+// import fetching method
+import { fetchNotes, fetchNoteById } from "../api.js";
+// function 
+import { renderNote } from "./note.js";
+//create note
+import { handleSubmit } from "../createNote.js";
 function renderAboutPage() {
     document.getElementById("app").innerHTML = 
     `
@@ -66,7 +71,8 @@ function renderAboutPage() {
     });
     
 }
-  
+
+// render note-list page
 function renderNoteList() {
     document.getElementById('app').innerHTML = 
     `
@@ -76,42 +82,85 @@ function renderNoteList() {
     <section id = "note-list"></section>
     `;  
     // Attach JavaScript event listener to the input element
-    document.getElementById('search').addEventListener('input', function() {
-        renderNote(demoData, this.value);
-    });
     var script = document.createElement('script');
-    script.src = '../script/renderNote.js';
-    script.onload = function() {
-        renderNote(demoData);
+    script.src = '../script/render/note.js';
+    script.type = 'module';
+    script.onload = async function() {
+        const data = await fetchNotes();
+        renderNote(data);
+        document.getElementById('search').addEventListener('input', function() {
+            renderNote(data, this.value);
+        });
     };
     document.head.appendChild(script);
   }
   
+// render the upload page
   function renderUploadPage() {
     document.getElementById('app').innerHTML = 
     `
     <div class = content-share-note>
-        <input class = "content-share-note-input" placeholder = "name"></input>
-        <div>
-            <button>add photo</button>
-            <button>add tag</button>
+        <input id = "content-share-note-input" placeholder = "name"></input>
+        <input id = "content-share-note-description" placeholder = "description"></input>
+        <input id = "content-share-note-tag" placeholder = "tag"></input>
+        <div id = "content-share-note-button-file">
+            <input type="file" id="fileInput" accept="image/*" multiple>
+            <button id = "content-share-note-button">Upload Note</button>
         </div>
     </div>
     `;
-  }
-
-  window.addEventListener('hashchange', function() {
-    if (window.location.hash === '#about') {
-      renderAboutPage();
-    } else if (window.location.hash === '#note-list') {
+    document.getElementById('content-share-note-button').addEventListener("click", handleSubmit);
+}
+let page_num = 0;
+async function renderViewNote(id) {
+    const data = await fetchNoteById(id);
+    const imgUri = `http://localhost:3222/files/${data.attachments[page_num]}`
+    const dateCreate = data.createdDatetime.split('T')[0];
+    document.getElementById('app').innerHTML = 
+    `
+    <div class = "content-view-note" >
+        <section>
+            <div class = note-container >
+                <img src = "${imgUri}">
+            </div>
+        </section>
+        <section class = "description-container">
+            <h1>${data.name}</h1>
+            <div class = "tag-container"></div>
+            <p>${data.description}</p>
+            <div class = "view-container">
+                <img src = "../assets/view.png"/>
+                <h2>${data.view}</h2>
+            </div>
+            <p class = "date-create">created on: ${dateCreate}</h2>
+            <div class = prev-next-container>
+                <button id = "prev">previus page</button>
+                <button id = "next">next page</button>
+            </div>
+        </section>
+    </div>
+    `
+    const updateImage = () => {
+        const imgElement = document.querySelector('.note-container img');
+        imgElement.src = `http://localhost:3222/files/${data.attachments[page_num]}`;
+    };
+    const prevButton = document.getElementById("prev");
+    prevButton.addEventListener('click', function () {
+        if(!page_num) return 0;
+        page_num--;
+        updateImage();
+    })
     
-      renderNoteList();
-    } else if (window.location.hash === '#upload') {
-      renderUploadPage();
-    }
-    console.log("hash-change")
-  });
-  document.addEventListener('DOMContentLoaded', function() {
-    renderAboutPage();
-  });
-  
+    const nextButton = document.getElementById("next")
+    nextButton.addEventListener('click', function() {
+        console.log(page_num);
+        if (page_num >= data.attachments.length - 1) {
+            return 0;
+        }
+        page_num++;
+        updateImage();
+    })
+
+}
+
+export {renderAboutPage,renderNoteList,renderUploadPage,renderViewNote};

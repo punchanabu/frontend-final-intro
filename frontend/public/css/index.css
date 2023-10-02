@@ -356,10 +356,11 @@ body {
     padding: 10px;
     border-radius: 21px;
     display: flex;
+    transition: 0.8s all;
     flex-direction: column;
 }
 .box:hover {
-    
+    border: solid #FFF
 }
 .box img {
     width: 100%;
@@ -367,9 +368,9 @@ body {
     align-self: center;
 }
 .box  h1 {
-    text-align: center;
     font-family: 'Roboto', 'Prompt';
     font-weight: bold;
+    margin-left: 10px;
 }
 .box p {
     font-family: 'Roboto';
@@ -472,21 +473,153 @@ footer > div > a:hover {
 
 
 .content-share-note {
-    padding: 16px;
+    padding: 20px;
     border-radius: 20px;
     background-image: linear-gradient(90deg, rgba(170, 170, 229, 1) 0%, rgba(255, 255, 255, 1) 100%);
 }
 
-.content-share-note-input {
+#content-share-note-input {
     background-color: #424281;
-    padding: 16px;
+    padding: 18px;
     border-radius: 20px;
     color: rgb(255, 255, 255);
     border: 0;
     font-family: 'Roboto';
-    font-size: 20px;
+    font-size: 16px;
+    box-shadow: 10px 5px 5px #8283D7;
 }
 
-.content-share-note-input:focus {
+#content-share-note-input:focus {
     border: 0;
+}
+/* content share note button style */
+#content-share-note-button {
+    background-color: #424281;
+    padding: 16px;
+    border-radius: 25px;
+    color: rgb(255, 255, 255);
+    border: 0;
+    font-family: 'Roboto';
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 20px 10px 10px 0px;
+    box-shadow: 10px 5px 5px #8283D7;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+#content-share-note-button:active , #content-share-note-button:hover  {
+    transform: translate(5px, 5px);
+    transition: transform 0.3s ease-in-out;
+}
+#content-share-note-button-flex {
+    display: flex;
+    flex-wrap: column;
+}
+
+#fileInput {
+    background-color: #424281;
+    padding: 16px;
+    border-radius: 25px;
+    color: rgb(255, 255, 255);
+    border: 0;
+    font-family: 'Roboto';
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 20px 10px 10px 0px;
+    box-shadow: 10px 5px 5px #8283D7;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.content-view-note {
+    display: flex;
+}
+
+.note-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #424281;
+    border-radius: 15px;
+    width: 700px;
+}
+
+.note-container img {
+    border-radius: 15px;
+    width: 100%;
+}
+.description-container {
+    border-radius: 30px;
+    background: linear-gradient(277deg, rgba(255, 255, 255, 0.90) -4.88%, #AAAAE5 93.33%);
+    padding: 10px;
+    margin-left: 25px;
+    font-family: 'Roboto';
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.description-container h1 {
+    background-color: #424281;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px #8283D7;
+}
+
+.description-container p {
+    background-color: #424281;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px #8283D7;
+    width: 80%;
+}
+.view-container {
+    display: flex;
+    background-color: #424281;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px #8283D7;
+    width: 80%;
+    justify-content: space-between;
+}
+.view-container img {
+    margin-top: 20px;
+    height: 30px;
+    width: 30px;
+}
+
+.date-create {
+    background-color: #424281;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px #8283D7;
+
+}
+
+.prev-next-container {
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px #8283D7;
+    width: 80%;
+}
+.prev-next-container > button {
+    padding: 10px 20px 10px 20px;
+    border-radius: 15px;
+    background: #424281;
+    color: white;
+    border: 0;
+    margin-right: 10px;
+    box-shadow: 3px 3px 3px 3px #8283D7;
+}
+
+.prev-next-container > button:hover {
+    box-shadow: 0;
+    transition: all 0.4s;
+    border: 2px solid white;
+}
+
+.prev-next-container > button:active {
+    transform: translate(5px,5px);
 }

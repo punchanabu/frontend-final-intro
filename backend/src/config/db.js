@@ -1,3 +1,3 @@
-import mongoose from "mongoose";
-
-await mongoose.connect("mongodb://127.0.0.1:27017/final_project");
+import mongoose from "mongoose"
+const uri = process.env.MONGO_URL;
+await mongoose.connect(uri);
