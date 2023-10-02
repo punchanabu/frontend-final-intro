@@ -9,8 +9,8 @@ export const prepare = (note,files) => {
     files.forEach((file,index) => {
         formData.append(`attachment${index + 1}`, file);
     })
-    const formDataObj = Object.fromEntries(formData.entries());
-    console.log(formDataObj);
+    
+    
     return formData;
 }
 
@@ -18,9 +18,8 @@ export const create = (noteData,fileInputs) => {
 
     const formData = prepare(noteData,fileInputs);
 
-    postNote(formData); // return a promise
+    postNote(formData); 
 }
-
 export const handleSubmit = () => {
     
     const name = document.getElementById('content-share-note-input').value;
