@@ -1,4 +1,4 @@
-const backend_uri = 'http://localhost:3222';
+const backend_uri = "http://localhost:3222";
 
 // fetching all note
 export async function fetchNotes() {
