@@ -21,7 +21,8 @@ export const create = (noteData,fileInputs) => {
     postNote(formData); 
 }
 export const handleSubmit = () => {
-    
+    // change the hash location to about
+    window.location.hash = 'about';
     const name = document.getElementById('content-share-note-input').value;
     const description = document.getElementById('content-share-note-description').value;
     const tags = getAllTags();

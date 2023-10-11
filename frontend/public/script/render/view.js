@@ -8,7 +8,7 @@ export async function renderViewNote(id) {
     const dateCreate = data.createdDatetime.split('T')[0];
 
     // render the view note component
-    render(data,imgUri,dateCreate);
+    render(data,imgUri,dateCreate,page_num);
 
     // update image
     updateImage(data,page_num);
@@ -35,7 +35,7 @@ export async function renderViewNote(id) {
 }
 
 // rendering component
-const render = (data,imgUri,dateCreate) => {
+const render = (data,imgUri,dateCreate,page_num) => {
     document.getElementById('app').innerHTML = 
     `
     <div class = "content-view-note" >
@@ -46,13 +46,14 @@ const render = (data,imgUri,dateCreate) => {
         </section>
         <section class = "description-container">
             <h1>${data.name}</h1>
-            <div class = "tag-container"></div>
+            <div class = "tag-container">${data.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>
             <p>${data.description}</p>
             <div class = "view-container">
                 <img src = "../assets/view.png"/>
                 <h2>${data.view}</h2>
             </div>
             <p class = "date-create">created on: ${dateCreate}</h2>
+            <div>Page:${page_num + 1}/${data.attachments.length}</div>
             <div class = prev-next-container>
                 <button id = "prev">previus page</button>
                 <button id = "next">next page</button>
