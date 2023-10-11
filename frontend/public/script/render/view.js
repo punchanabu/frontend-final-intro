@@ -19,6 +19,7 @@ export async function renderViewNote(id) {
         if(!page_num) return 0;
         page_num--;
         updateImage(data,page_num);
+        
     })
     
     // handle next button
@@ -30,6 +31,7 @@ export async function renderViewNote(id) {
         }
         page_num++;
         updateImage(data,page_num);
+        
     })
 
 }
@@ -53,7 +55,7 @@ const render = (data,imgUri,dateCreate,page_num) => {
                 <h2>${data.view}</h2>
             </div>
             <p class = "date-create">created on: ${dateCreate}</h2>
-            <div>Page:${page_num + 1}/${data.attachments.length}</div>
+            <div class = "num">Page:${page_num + 1}/${data.attachments.length}</div>
             <div class = prev-next-container>
                 <button id = "prev">previus page</button>
                 <button id = "next">next page</button>
@@ -67,4 +69,6 @@ const render = (data,imgUri,dateCreate,page_num) => {
 const updateImage = (data,page_num) => {
     const imgElement = document.querySelector('.note-container img');
     imgElement.src = `http://localhost:3222/files/${data.attachments[page_num]}`;
+    const pageNumElement = document.querySelector('.description-container .num');
+    pageNumElement.textContent = `Page: ${page_num + 1}/${data.attachments.length}`;
 }
